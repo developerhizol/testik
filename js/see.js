@@ -1,7 +1,7 @@
 const API_BASE = '/api/kinopoisk';
 const NO_BACKDROP_URL = '/imgs/nobackdrop.jpg';
 const AD_IMAGE_URL = '/imgs/subscribe.jpg';
-const AD_OVERLAY_SIZE = 0; // ← Увеличивает оверлей на это количество пикселей по ВСЕМ краям (внутри модального окна)
+const AD_OVERLAY_SIZE = 5; // ← Увеличивает оверлей на это количество пикселей по ВСЕМ краям (внутри модального окна)
 
 const POSTER_POSITION = {
     vertical: 50,
