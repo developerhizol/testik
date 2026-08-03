@@ -1,0 +1,60 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/kinopoisk",
+      "destination": "/api/kinopoisk.js"
+    },
+    {
+      "source": "/film/:id/",
+      "destination": "/see.html"
+    },
+    {
+      "source": "/film/:id",
+      "destination": "/see.html"
+    },
+    {
+      "source": "/series/:id/",
+      "destination": "/see.html"
+    },
+    {
+      "source": "/series/:id",
+      "destination": "/see.html"
+    },
+    {
+      "source": "/movie/:id/",
+      "destination": "/see.html"
+    },
+    {
+      "source": "/movie/:id",
+      "destination": "/see.html"
+    },
+    {
+      "source": "/tv/:id/",
+      "destination": "/see.html"
+    },
+    {
+      "source": "/tv/:id",
+      "destination": "/see.html"
+    },
+    {
+      "source": "/person/:slug-:id/",
+      "destination": "/person.html"
+    },
+    {
+      "source": "/person/:slug-:id",
+      "destination": "/person.html"
+    },
+    {
+      "source": "/person/:id/",
+      "destination": "/person.html"
+    },
+    {
+      "source": "/person/:id",
+      "destination": "/person.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

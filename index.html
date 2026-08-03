@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>ProKino — фильмы и сериалы онлайн</title>
+    <meta name="description" content="ProKino — смотрите фильмы и сериалы онлайн в 4K качестве. Бесплатно, без регистрации.">
+
+    <link rel="icon" type="image/x-icon" href="/imgs/favicon.ico?v=2">
+    
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105845460', 'ym');
+        ym(105845460, 'init', {webvisor:true, clickmap:true, trackLinks:true, accurateTrackBounce:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/105845460" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+    <script src="https://sdk.adlook.tech/inventory/core.js" async type="text/javascript"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+
+    <header class="header" id="header">
+        <div class="header-inner">
+            <div class="logo" onclick="window.location.href='/'">
+                <span>Pro</span><span>Kino</span>
+            </div>
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Поиск..." autocomplete="off">
+            </div>
+            <div class="header-buttons">
+                <button class="icon-btn" id="bookmarksBtn"><i class="fas fa-bookmark"></i><span class="bookmarks-count" id="bookmarksCount">0</span></button>
+            </div>
+        </div>
+    </header>
+
+    <div id="bookmarkToast" class="toast-notification">
+        <i class="fas fa-bookmark"></i>
+        <span id="toastMessage">Добавлено в закладки</span>
+    </div>
+
+    <div class="slider_movie">
+        <div class="main-slider swiper-container">
+            <div class="swiper-wrapper" id="sliderWrapper"></div>
+            <div class="slider_movie-indicators">
+                <div class="slider_movie-left" id="sliderPrev"><i class="fas fa-chevron-left"></i></div>
+                <div class="swiper-pagination" id="sliderPagination"></div>
+                <div class="slider_movie-right" id="sliderNext"><i class="fas fa-chevron-right"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <main class="main">
+        <div class="container">
+            <div class="section" id="trendingSection">
+                <div class="section-header">
+                    <h2 class="section-title">Популярное</h2>
+                    <div class="trend-switch">
+                        <button class="trend-btn active" data-trend="day">Сегодня</button>
+                        <button class="trend-btn" data-trend="week">Неделя</button>
+                    </div>
+                </div>
+                <div class="movies-grid" id="trendingGrid"><div class="loading"><div class="spinner"></div>Загрузка...</div></div>
+            </div>
+            <div class="section" id="nowPlayingSection">
+                <div class="section-header"><h2 class="section-title">В прокате</h2></div>
+                <div class="movies-grid" id="nowPlayingGrid"><div class="loading"><div class="spinner"></div>Загрузка...</div></div>
+            </div>
+            <div class="section" id="topRatedSection">
+                <div class="section-header"><h2 class="section-title">Лучшие фильмы</h2></div>
+                <div class="movies-grid" id="topRatedGrid"><div class="loading"><div class="spinner"></div>Загрузка...</div></div>
+            </div>
+            <div class="section" id="upcomingSection">
+                <div class="section-header"><h2 class="section-title">Ожидаемые новинки</h2></div>
+                <div class="movies-grid" id="upcomingGrid"><div class="loading"><div class="spinner"></div>Загрузка...</div></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>ProKino — смотри фильмы и сериалы онлайн бесплатно</p>
+        </div>
+    </footer>
+
+    <div class="modal" id="bookmarksModal">
+        <div class="modal-content">
+            <div class="modal-header"><h3><i class="fas fa-bookmark"></i> Мои закладки</h3><button class="close-modal" id="closeModal">&times;</button></div>
+            <div id="bookmarksList" class="bookmarks-list"><div style="text-align: center; color: #666; padding: 40px;"><i class="fas fa-inbox"></i> Нет сохранённых фильмов</div></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+    
+    <script>
+    (function UTCoreInitialization() {
+      if (window.UTInventoryCore) {
+        new window.UTInventoryCore({
+          type: "sticky",
+          host: 5858,
+          content: false,
+          adaptive: true,
+          width: 400,
+          height: 225,
+          playMode: "autoplay",
+          align: "right",
+          verticalAlign: "bottom",
+          openTo: "open-creativeView",
+          infinity: true,
+          infinityTimer: 1,
+          interfaceType: 0,
+          withoutIframe: true,
+          mobile: {
+            align: "center",
+            verticalAlign: "bottom",
+            mobileStickyHeight: 25,
+          }
+        });
+        return;
+      }
+      if (!window.UTInventoryCore) {
+        setTimeout(UTCoreInitialization, 100);
+      }
+    })();
+    </script>
+</body>
+  </html>
