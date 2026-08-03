@@ -1056,7 +1056,7 @@ class MoviePage {
             position: fixed;
             top: ${containerRect.top}px;
             left: ${containerRect.left}px;
-            width: ${containerRect.width}px;
+            width: ${containerRect.width + 20}px;
             height: ${containerRect.height}px;
             background: rgba(0, 0, 0, 0.92);
             z-index: 99999;
