@@ -1,0 +1,520 @@
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { background-color: #0a0a0a !important; color: #fff; font-family: 'Inter', sans-serif; min-height: 100vh; width: 100%; overflow-x: hidden; }
+
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0a0a0a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease-out;
+}
+#loading-screen.fade-out { opacity: 0; pointer-events: none; }
+.loaderArea {
+    background-color: #0a0a0a !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+.camera-loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+#camera-loader { width: 120px; height: 140px; margin: 0; padding: 0; display: block; overflow: visible; }
+#camera-body, #reel-1, #reel-2 { fill: #ffffff; }
+.error-message { color: #e50914; font-size: 18px; margin-top: 20px; text-align: center; }
+.retry-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #e50914;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.close-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    width: 44px;
+    height: 44px;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+.close-button:hover { background: rgba(0,0,0,0.7); transform: scale(1.05); }
+.close-button i { color: white; font-size: 20px; }
+
+#main-content { display: none; width: 100%; min-height: 100vh; }
+.content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 20px 40px;
+}
+
+.person-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 40px;
+}
+@media (min-width: 768px) {
+    .person-header {
+        flex-direction: row;
+        text-align: left;
+        gap: 40px;
+    }
+}
+
+.person-photo-container {
+    flex-shrink: 0;
+    width: 200px;
+    height: 300px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin-bottom: 24px;
+    background: #1a1a1a;
+}
+@media (min-width: 768px) {
+    .person-photo-container {
+        width: 250px;
+        height: 375px;
+        margin-bottom: 0;
+    }
+}
+.person-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.person-info { flex: 1; }
+.person-name {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+}
+@media (min-width: 768px) {
+    .person-name { font-size: 42px; }
+}
+
+.person-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.meta-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.meta-item {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    color: #aaa;
+    font-size: 15px;
+    justify-content: center;
+}
+@media (min-width: 768px) {
+    .meta-item { justify-content: flex-start; }
+}
+.meta-item i {
+    width: 20px;
+    color: #e50914;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+.meta-item strong { color: #fff; margin-right: 4px; }
+
+/* Уменьшенный шрифт для мета-информации на маленьких экранах */
+@media (max-width: 480px) {
+    .meta-item {
+        font-size: 12px;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+    .meta-item i {
+        width: 16px;
+        font-size: 11px;
+    }
+    .meta-item strong {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 380px) {
+    .meta-item {
+        font-size: 11px;
+        gap: 5px;
+    }
+    .meta-item i {
+        width: 14px;
+        font-size: 10px;
+    }
+    .meta-item strong {
+        font-size: 11px;
+    }
+}
+
+.section-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-left: 4px solid #e50914;
+    padding-left: 16px;
+    letter-spacing: -0.3px;
+}
+
+.person-biography-wrapper { margin-bottom: 40px; }
+.person-biography {
+    color: #ccc;
+    line-height: 1.7;
+    font-size: 16px;
+    max-width: 900px;
+}
+.biography-text { display: inline; }
+.biography-toggle {
+    background: none;
+    border: none;
+    color: #e50914;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 8px;
+    font-family: 'Inter', sans-serif;
+}
+.biography-toggle:hover { opacity: 0.8; text-decoration: underline; }
+.biography-dots { display: inline; color: #ccc; }
+
+.person-filmography-section { margin-bottom: 40px; }
+
+.filmography-tabs {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 12px;
+}
+.filmography-tab {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 6px 0;
+    transition: color 0.2s;
+    position: relative;
+}
+.filmography-tab:hover { color: #fff; }
+.filmography-tab.active { color: #e50914; }
+.filmography-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -13px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e50914;
+}
+
+.filmography-container {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 10px;
+}
+.filmography-container::-webkit-scrollbar { display: none; }
+
+.filmography-grid {
+    display: flex;
+    gap: 14px;
+    width: max-content;
+    padding: 5px 0;
+}
+
+.film-card {
+    width: 140px;
+    background: #0b0b0b;
+    border-radius: 8px;
+    padding: 4px;
+    color: #fff;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+    flex-shrink: 0;
+    border: 1px solid #2a2a2a;
+}
+.film-card:hover { transform: scale(1.03); border-color: #e50914; }
+@media (min-width: 768px) {
+    .film-card { width: 150px; }
+}
+
+.film-poster {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2/3;
+    overflow: hidden;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.film-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.film-rating {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #0b0b0b;
+    padding: 3px 6px;
+    border-bottom-right-radius: 8px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #fff;
+}
+.film-title {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.film-year {
+    font-size: 10px;
+    color: #888;
+}
+.film-character {
+    font-size: 10px;
+    color: #e50914;
+    margin-top: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.custom-scrollbar {
+    width: 100%;
+    height: 6px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    position: relative;
+    cursor: pointer;
+    display: none;
+}
+.custom-scrollbar.visible { display: block; }
+.custom-scrollbar-track {
+    width: 100%;
+    height: 100%;
+    background: #1a1a1a;
+    border-radius: 10px;
+    position: relative;
+}
+.custom-scrollbar-thumb {
+    height: 100%;
+    background: #e50914;
+    border-radius: 10px;
+    width: 0%;
+    position: relative;
+    cursor: grab;
+    transition: width 0.05s linear;
+}
+.custom-scrollbar-thumb:active { cursor: grabbing; }
+
+/* Футер как на странице просмотра */
+.copyright-footer {
+    width: 100%;
+    background-color: transparent;
+    padding: 15px 20px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 14px;
+    margin-top: 30px;
+}
+.copyright-text {
+    color: #888;
+    font-weight: 500;
+    display: inline-block;
+}
+.copyright-email {
+    color: #aaa;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 500;
+    display: inline-block;
+    margin-left: 4px;
+}
+.copyright-email:hover {
+    color: #e50914;
+}
+
+/* Адаптация для маленьких экранов */
+@media (max-width: 600px) {
+    .copyright-footer {
+        display: flex;
+        flex-wrap: nowrap !important;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        padding: 12px 10px;
+        white-space: nowrap;
+        overflow-x: auto;
+    }
+    
+    .copyright-text {
+        white-space: nowrap;
+        font-size: 11px;
+        flex-shrink: 0;
+    }
+    
+    .copyright-email {
+        white-space: nowrap;
+        font-size: 11px;
+        flex-shrink: 0;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .copyright-footer {
+        gap: 4px;
+        padding: 10px 8px;
+    }
+    .copyright-text {
+        font-size: 10px;
+    }
+    .copyright-email {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    .copyright-footer {
+        gap: 3px;
+        padding: 8px 6px;
+    }
+    .copyright-text {
+        font-size: 9px;
+    }
+    .copyright-email {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 340px) {
+    .copyright-footer {
+        flex-direction: column;
+        gap: 2px;
+        white-space: normal;
+        text-align: center;
+    }
+    .copyright-text {
+        white-space: normal;
+        font-size: 10px;
+    }
+    .copyright-email {
+        white-space: normal;
+        font-size: 10px;
+    }
+}
+
+/* Универсальный плейсхолдер для отсутствующих изображений */
+.no-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #2a2a2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+}
+
+/* Для иконки внутри плейсхолдера */
+.no-image-placeholder i {
+    font-size: 32px;
+    color: #666;
+}
+
+/* Для постера фильма в фильмографии */
+.film-poster .no-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #2a2a2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Для фото актёра */
+.person-photo-container .no-image-placeholder {
+    font-size: 64px;
+}
+.person-photo-container .no-image-placeholder i {
+    font-size: 64px;
+}
+
+@media (max-width: 480px) {
+    .content-wrapper { padding: 70px 16px 30px; }
+    .close-button { top: 15px; left: 15px; width: 40px; height: 40px; }
+    .person-name { font-size: 28px; }
+    .section-title { font-size: 20px; }
+    #camera-loader { width: 120px; height: 140px; }
+    .no-image-placeholder {
+        font-size: 24px;
+    }
+    .no-image-placeholder i {
+        font-size: 24px;
+    }
+    .person-photo-container .no-image-placeholder i {
+        font-size: 48px;
+    }
+    .film-poster .no-image-placeholder i {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 768px) and (min-width: 481px) {
+    .no-image-placeholder i {
+        font-size: 28px;
+    }
+    .person-photo-container .no-image-placeholder i {
+        font-size: 56px;
+    }
+}
