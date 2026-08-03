@@ -1054,10 +1054,10 @@ class MoviePage {
         this.adOverlay.id = 'adOverlay';
         this.adOverlay.style.cssText = `
             position: fixed;
-            top: ${containerRect.top}px;
-            left: ${containerRect.left}px;
+            top: ${containerRect.top+ 20}px;
+            left: ${containerRect.left + 20}px;
             width: ${containerRect.width + 20}px;
-            height: ${containerRect.height}px;
+            height: ${containerRect.height + 20}px;
             background: rgba(0, 0, 0, 0.92);
             z-index: 99999;
             display: flex;
